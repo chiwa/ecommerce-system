@@ -30,7 +30,9 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: e_commerce_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   order-service:
     build: ./order-service
@@ -40,3 +42,5 @@ services:
       - kafka
       - postgres
 
+volumes:
+  pgdata:
