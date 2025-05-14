@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+custom:
+  message: "Hello from config server"
+
+
