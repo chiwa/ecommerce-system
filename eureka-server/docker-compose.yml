@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  config-server:
+    build: ./configserver-service
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./configserver-service/config-repo:/app/config-repo  # <-- Mount ให้ Container
+    environment:
+      - SPRING_PROFILES_ACTIVE=native
+    networks:
+      - ecommerce-net
+
+networks:
+  ecommerce-net:
+    external: true

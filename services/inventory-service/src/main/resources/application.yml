@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: order-service
+
+  config:
+    import: "configserver:http://config-server:8888"
+
+  profiles:
+    active: default
+
+logging:
+  level:
+    com.netflix.discovery: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG

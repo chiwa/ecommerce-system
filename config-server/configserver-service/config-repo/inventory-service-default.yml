@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+logging:
+  level:
+    root: DEBUG
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: order-service
+custom:
+  message: "Hello from config server Edit by Pea"
