@@ -4,9 +4,14 @@ services:
     build: ./configserver-service
     ports:
       - "8888:8888"
+    volumes:
+      #- ./configserver-service/config-repo:/app/config-repo  # <-- Mount ให้ Container
+      - ${HOST_MOUNT_PATH}:/app/config-repo
+    environment:
+      - SPRING_PROFILES_ACTIVE=native
     networks:
       - ecommerce-net
-      -
+
 networks:
   ecommerce-net:
     external: true

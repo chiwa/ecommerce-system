@@ -28,6 +28,7 @@ public class OrderController {
     @PostMapping
     public Order placeOrder(@RequestBody Order order) {
         order.setCreateDate(LocalDateTime.now());
+        order.setStatus("INITIAL");
         Order savedOrder = orderRepository.save(order);
 
         PlaceOrderEvent event = new PlaceOrderEvent(

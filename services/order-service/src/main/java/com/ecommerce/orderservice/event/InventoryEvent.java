@@ -1,13 +1,12 @@
-package com.ecommerce.inventoryservice.event;
+package com.ecommerce.orderservice.event;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OrderEvent {
-    private Long id;
-    private String orderId;
+public class InventoryEvent {
+    private Long orderId;
     private String customerId;
     private String productName;
     private int quantity;
@@ -15,19 +14,11 @@ public class OrderEvent {
     private LocalDateTime createDate;
     private String status; // INVENTORY_RESERVED, OUT_OF_STOCK, PRODUCT_NOT_FOUND
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 

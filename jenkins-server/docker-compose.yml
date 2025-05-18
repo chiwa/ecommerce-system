@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  jenkins:
+    build: .
+    ports:
+      - "8086:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /Users/chiwakantawong/blog/ecommerce-system:/workspace/ecommerce-system
+    user: "root"
+    networks:
+      - ecommerce-net
+
+volumes:
+  jenkins-data:
+
+networks:
+  ecommerce-net:
+    external: true

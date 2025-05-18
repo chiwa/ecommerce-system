@@ -1,46 +1,21 @@
 version: '3.8'
 services:
-  zookeeper:
-    image: wurstmeister/zookeeper
-    ports:
-      - "2181:2181"
-
-  kafka:
-    image: wurstmeister/kafka
-    ports:
-      - "9093:9093"
-    environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9093
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    depends_on:
-      - zookeeper
-
-  redis:
-    image: redis
-    ports:
-      - "6379:6379"
-
-  postgres:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: e_commerce_db
-    ports:
-      - "5433:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   order-service:
-    build: ./order-service
+    build: ../services/order-service
     ports:
-      - "8081:8080"
-    depends_on:
-      - kafka
-      - postgres
+      - "8081:8081"
+    networks:
+      - ecommerce-net
 
-volumes:
-  pgdata:
+  inventory-service:
+    build: ../services/inventory-service
+    deploy:
+      replicas: 1  # รัน 3  instance ไปเล๊ยยยย
+    networks:
+      - ecommerce-net
+
+  # ...services อื่นๆ เหมือนกัน เพิ่ม networks: ecommerce-net เช่นกัน
+
+networks:
+  ecommerce-net:
+    external: true

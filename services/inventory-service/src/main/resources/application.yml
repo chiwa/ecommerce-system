@@ -1,6 +1,6 @@
 spring:
   application:
-    name: order-service
+    name: inventory-service
 
   config:
     import: "configserver:http://config-server:8888"
@@ -10,6 +10,13 @@ spring:
 
 logging:
   level:
-    com.netflix.discovery: DEBUG
-    org.springframework.cloud.netflix.eureka: DEBUG
-    org.springframework.web.client.RestTemplate: DEBUG
+    com.zaxxer.hikari: WARN
+    root: INFO
+    org.apache.kafka: INFO
+    org.apache.camel: INFO
+    org.springframework.web: WARN
+    org.apache.hc.client5.http: WARN
+    com.netflix: WARN
+    org.hibernate: WARN
+    org.postgresql: WARN
+    com.ecommerce.inventoryservice: DEBUG

@@ -1,6 +1,7 @@
-package com.ecommerce.inventoryservice.camel;
+package com.ecommerce.orderservice.camel;
 
-import com.ecommerce.inventoryservice.event.OrderEvent;
+import com.ecommerce.orderservice.event.InventoryEvent;
+import com.ecommerce.orderservice.repository.OrderRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.camel.builder.RouteBuilder;
@@ -20,17 +21,17 @@ public class InventoryResultRoute extends RouteBuilder {
     public void configure() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-        JacksonDataFormat jacksonDataFormat = new JacksonDataFormat(OrderEvent.class);
+        JacksonDataFormat jacksonDataFormat = new JacksonDataFormat(InventoryEvent.class);
         jacksonDataFormat.setObjectMapper(mapper);
 
-        from("kafka:inventory-events?brokers={{kafka.bootstrap-servers}}")
+        from("kafka:inventory-events?brokers={{kafka.bootstrap-servers}}&groupId=order-group")
                 .log("Received inventory result: ${body}")
                 .unmarshal(jacksonDataFormat)
                 .process(exchange -> {
-                    OrderEvent event = exchange.getIn().getBody(OrderEvent.class);
-                    log.info("Updating status for Order ID: {}", event.getId());
+                    InventoryEvent event = exchange.getIn().getBody(InventoryEvent.class);
+                    log.info("Updating status for Order ID: {}", event.getOrderId());
 
-                    orderRepository.findById(event.getId()).ifPresent(order -> {
+                    orderRepository.findById(event.getOrderId()).ifPresent(order -> {
                         order.setStatus(event.getStatus());
                         orderRepository.save(order);
                         log.info("Order ID {} updated to status {}", order.getId(), order.getStatus());

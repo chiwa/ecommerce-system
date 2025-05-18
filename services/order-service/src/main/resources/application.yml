@@ -1,18 +1,21 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://postgres:5432/e_commerce_db
-    username: user
-    password: password
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: none
-  liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yaml
+  application:
+    name: order-service
 
-kafka:
-  bootstrap-servers: kafka:9093
+  config:
+    import: "configserver:http://config-server:8888"
 
-logging:
+  profiles:
+    active: default
+
   level:
-    root: DEBUG
+    com.zaxxer.hikari: WARN
+    root: INFO
+    org.apache.kafka: WARN
+    org.apache.camel: WARN
+    org.springframework.web: WARN
+    org.apache.hc.client5.http: WARN
+    com.netflix: WARN
+    org.hibernate: WARN
+    org.postgresql: WARN
+    com.ecommerce: DEBUG

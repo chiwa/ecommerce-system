@@ -1,16 +1,15 @@
 version: '3.8'
 services:
-  config-server:
-    build: ./configserver-service
+  eureka-server:
+    build: ./eurekaserver-service
+    container_name: eureka-server
     ports:
-      - "8888:8888"
-    volumes:
-      - ./configserver-service/config-repo:/app/config-repo  # <-- Mount ให้ Container
-    environment:
-      - SPRING_PROFILES_ACTIVE=native
+      - "8761:8761"
     networks:
       - ecommerce-net
 
 networks:
   ecommerce-net:
     external: true
+
+

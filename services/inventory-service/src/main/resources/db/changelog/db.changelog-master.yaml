@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: chiwa
+      changes:
+        - createTable:
+            tableName: inventory
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: product_name
+                  type: VARCHAR(255)
+              - column:
+                  name: stock
+                  type: INT
+  - changeSet:
+      id: 2
+      author: chiwa
+      changes:
+        - insert:
+            tableName: inventory
+            columns:
+              - column: { name: product_name, value: "Book" }
+              - column: { name: stock, valueNumeric: 100 }
+        - insert:
+            tableName: inventory
+            columns:
+              - column: { name: product_name, value: "Pen" }
+              - column: { name: stock, valueNumeric: 200 }

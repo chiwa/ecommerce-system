@@ -4,6 +4,8 @@ services:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
+    networks:
+      - ecommerce-net
 
   kafka:
     image: wurstmeister/kafka
@@ -17,11 +19,15 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     depends_on:
       - zookeeper
+    networks:
+      - ecommerce-net
 
   redis:
     image: redis
     ports:
       - "6379:6379"
+    networks:
+      - ecommerce-net
 
   postgres:
     image: postgres:13
@@ -33,14 +39,21 @@ services:
       - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - ecommerce-net
 
-  order-service:
-    build: ./order-service
+  kafka-ui:
+    image: provectuslabs/kafka-ui
     ports:
-      - "8081:8080"
-    depends_on:
-      - kafka
-      - postgres
+      - "8085:8080"  # เปิดบนเครื่องที่พอร์ต 8085
+    environment:
+      - DYNAMIC_CONFIG_ENABLED=true
+    networks:
+      - ecommerce-net
 
 volumes:
   pgdata:
+
+networks:
+  ecommerce-net:
+    external: true

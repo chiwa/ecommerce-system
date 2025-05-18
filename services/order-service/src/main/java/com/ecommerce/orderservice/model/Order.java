@@ -17,11 +17,11 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;                       // รหัส Order
-
     private String customerId;             // รหัสลูกค้า
     private String productName;            // ชื่อสินค้า
     private int quantity;                  // จำนวน
     private BigDecimal price;              // ราคา
+    private String status = "INITIAL";
     private LocalDateTime createDate = LocalDateTime.now();  // วันที่สั่งซื้อ
 
     public Long getId() {
@@ -62,6 +62,14 @@ public class Order {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreateDate() {

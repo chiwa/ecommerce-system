@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: yourname
+      changes:
+        - dropTable:
+            tableName: orders
+            cascadeConstraints: true  # เผื่อมี foreign key อื่นผูกอยู่ จะได้ลบได้
+            ifExists: true            # ลบเฉพาะถ้ามีอยู่จริง ป้องกัน error
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: customer_id
+                  type: VARCHAR(50)
+              - column:
+                  name: product_name
+                  type: VARCHAR(255)
+              - column:
+                  name: quantity
+                  type: INT
+              - column:
+                  name: price
+                  type: DECIMAL(10,2)
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  defaultValue: 'INITIAL'
+              - column:
+                  name: create_date
+                  type: TIMESTAMP

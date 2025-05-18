@@ -4,13 +4,14 @@ spring:
     username: user
     password: password
     driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    clear-checksums: true  # ใช้เฉพาะตอนพัฒนา
+
   jpa:
     hibernate:
       ddl-auto: none
 
 kafka:
   bootstrap-servers: kafka:9093
-
-logging:
-  level:
-    root: DEBUG
