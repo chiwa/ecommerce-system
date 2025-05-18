@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: notification-service
+
+  config:
+    import: "configserver:http://config-server:8888"
+
+  profiles:
+    active: default
+
+logging:
+  level:
+    com.zaxxer.hikari: WARN
+    root: INFO
+    org.apache.kafka: INFO
+    org.apache.camel: INFO
+    org.springframework.web: WARN
+    org.apache.hc.client5.http: WARN
+    com.netflix: WARN
+    org.hibernate: WARN
+    org.postgresql: WARN
+    com.ecommerce.notificationservice: DEBUG

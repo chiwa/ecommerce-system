@@ -7,30 +7,3 @@ docker compose up -d
 
 Config
 HOST_MOUNT_PATH=./configserver-service/config-repo docker compose up -d --build
-
-curl -X POST https://api.line.me/v2/bot/message/push \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer QpSVZcYp+XWdIF97Xcx8IhZ/rMLRZL/ZTUip6d6T3ShldSG4Hd9kCzcGb/XM/wIQ54emVCNny9XgS92520+YM5h/wQ3JpyFOTTZoNebqM9i9Gt4XX5KU/3RAiCgSrPRtI8378uuTWzY6O1G/GmEoPgdB04t89/1O/w1cDnyilFU=' \
--d '{
-    "to": "zengcode",
-    "messages":[
-        {
-            "type":"text",
-            "text":"สินค้าไม่เพียงพอสำหรับคำสั่งซื้อของคุณ"
-        }
-    ]
-}'
-
-curl -X POST https://api.line.me/v2/bot/message/broadcast \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer QpSVZcYp+XWdIF97Xcx8IhZ/rMLRZL/ZTUip6d6T3ShldSG4Hd9kCzcGb/XM/wIQ54emVCNny9XgS92520+YM5h/wQ3JpyFOTTZoNebqM9i9Gt4XX5KU/3RAiCgSrPRtI8378uuTWzY6O1G/GmEoPgdB04t89/1O/w1cDnyilFU=' \
--d '{
-    "messages":[
-        {
-            "type":"text",
-            "text":"สินค้าไม่เพียงพอสำหรับคำสั่งซื้อของคุณ"
-        }
-    ]
-}'
-
-https://developers.line.biz/console/channel/2007430474/messaging-api

@@ -14,6 +14,13 @@ services:
     networks:
       - ecommerce-net
 
+  notification-service:
+    build: ../services/notification-service
+    deploy:
+      replicas: 1  # รัน 3  instance ไปเล๊ยยยย
+    networks:
+      - ecommerce-net
+
   # ...services อื่นๆ เหมือนกัน เพิ่ม networks: ecommerce-net เช่นกัน
 
 networks:

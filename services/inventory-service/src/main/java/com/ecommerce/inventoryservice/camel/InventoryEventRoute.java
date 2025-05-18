@@ -45,6 +45,7 @@ public class InventoryEventRoute extends RouteBuilder {
                                     exchange.getContext().createProducerTemplate().sendBody("log:inventory-check?level=INFO",
                                             "Not enough stock for product: " + event.getProductName());
                                 }
+                                event.setAvailableStock(inventory.getStock());
                                 exchange.getIn().setBody(event);
                             }, () -> {
                                 event.setStatus("PRODUCT_NOT_FOUND");
